@@ -1,0 +1,29 @@
+{% extends 'AppPrueba/padre.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">LISTADO DE PROVEEDORES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h1>YERBAS</h1>
+{% if provs %}
+
+<ul>
+    {% for i in provs %}
+       <h4>{{i.nombre}} - {{i.tipo}} - {{i.fecha_vencimiento}}</h4>
+       
+       
+        <br>
+    {% endfor %}   
+
+</ul>
+
+{% else %}
+<p>NO SE ENCONTRARON PROVEEDORES</p>
+
+{% endif %}
+<a class="btn btn-primary" href="{% url 'proveedor' %}">Agregar Proveedor</a>
+
+{% endblock %}
