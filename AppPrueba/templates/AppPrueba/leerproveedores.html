@@ -12,7 +12,8 @@
 
 <ul>
     {% for i in provs %}
-       <h4>{{i.nombre}} - {{i.tipo}} - {{i.fecha_vencimiento}}</h4>
+       <h4>{{i.nombre}}</h4>
+       <a class="btn btn-danger" href="{% url 'eliminarProveedor' i.id %}">Eliminar</a>
        
        
         <br>

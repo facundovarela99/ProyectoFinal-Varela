@@ -1,0 +1,31 @@
+{% extends 'AppPrueba/padre.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">LISTADO DE PROVEEDORES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h1>YERBAS</h1>
+{% if mats %}
+
+<ul>
+    {% for i in mats %}
+       <h4>{{i.nombre}} - {{i.tipo}} - {{i.cantidad_x_caja}}</h4>
+       <a class="btn btn-danger" href="{% url 'eliminarMate' i.id %}">Eliminar</a>
+       
+       
+       
+        <br>
+    {% endfor %}   
+
+</ul>
+
+{% else %}
+<p>NO SE ENCONTRARON MATES</p>
+
+{% endif %}
+<a class="btn btn-primary" href="{% url 'mates' %}">Agregar Mate</a>
+
+{% endblock %}

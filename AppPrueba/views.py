@@ -64,7 +64,8 @@ def proveedor(request):
             nombre=info['nombre']
             prov=proveedores(nombre=nombre)
             prov.save()
-            return render (request, 'AppPrueba/leerproveedor.html', {'mensaje':'Proveedor creado!'})
+            provs=proveedores.objects.all()
+            return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs})
     else:
         form=proveedoresForms
     return render (request, 'AppPrueba/proveedor.html', {'formulario':form})
@@ -77,12 +78,9 @@ def eliminarProveedor(request, id):
     proveedor=proveedores.objects.get(id=id)
     proveedor.delete()
     provs=proveedores.objects.all()
-    return render(request, 'AppPrueba/leeryerbas.html', {'provs':provs})
+    return render(request, 'AppPrueba/leerproveedores.html', {'provs':provs})
 
-
-
-
-
+#MATES
 def mates(request):
     if request.method=='POST':
         form=mateForms(request.POST)
@@ -93,10 +91,23 @@ def mates(request):
             cantidad_x_caja=info['cantidad_x_caja']
             mat=mate(nombre=nombre, tipo=tipo, cantidad_x_caja=cantidad_x_caja)
             mat.save()
-            return render (request, 'AppPrueba/inicio.html', {'mensaje':'Mate creado!'})
+            mats=mate.objects.all()
+            return render (request, 'AppPrueba/leermates.html', {'mats':mats})
     else:
         form=mateForms
     return render (request, 'AppPrueba/mate.html', {'formulario':form})
+
+def leermates(request):
+    mats=mate.objects.all()
+    return render(request, 'AppPrueba/leermates.html', {'mats':mats})
+
+def eliminarMate(request, id):
+    mat=mate.objects.get(id=id)
+    mat.delete()
+    mats=mate.objects.all()
+    return render(request, 'AppPrueba/leermates.html', {'mats':mats})
+
+
 
 
             

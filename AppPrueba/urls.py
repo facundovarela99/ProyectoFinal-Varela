@@ -7,13 +7,14 @@ urlpatterns = [
     path('yerbas/', yerbasSAPE, name = 'yerbas'),
     path('proveedor/', proveedor, name = 'proveedor'),
     path('mates/', mates, name = 'mates'),
+    #yerbas
     path('leeryerbas/', leeryerbas, name = 'leeryerbas'),
     path('eliminarYerba/<id>', eliminarYerba, name = 'eliminarYerba'),
     path('editarYerba/<id>', editarYerba, name= 'editarYerba'),
-    path('leerproveedores/', leeryerbas, name = 'leeryerbas'),
-    path('eliminarProveedor/', eliminarProveedor, name = 'elimnarProveedor'),
-    
-    
-
-
+    #proveedores
+    path('leerproveedores/', leerproveedores, name = 'leerproveedores'),
+    path('eliminarProveedor/<id>', eliminarProveedor, name = 'eliminarProveedor'),
+    #mates
+    path('leermates/', leermates, name = 'leermates'),
+    path('eliminarMate/<id>', eliminarMate, name = 'eliminarMate'),
 ]
