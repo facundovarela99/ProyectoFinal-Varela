@@ -1,5 +1,6 @@
 from django.urls import path 
 from AppPrueba.views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     
@@ -17,4 +18,8 @@ urlpatterns = [
     #mates
     path('leermates/', leermates, name = 'leermates'),
     path('eliminarMate/<id>', eliminarMate, name = 'eliminarMate'),
+    #login-logout-register
+    path('login/', login_request, name = 'login'),
+    path('register/', register, name='register'),
+    path('logout/', LogoutView.as_view(template_name='AppPrueba/logout.html'), name='logout'),
 ]

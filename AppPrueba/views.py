@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import *
-from .forms import *
+from AppPrueba.forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 
@@ -79,8 +81,9 @@ def eliminarProveedor(request, id):
     proveedor.delete()
     provs=proveedores.objects.all()
     return render(request, 'AppPrueba/leerproveedores.html', {'provs':provs})
+#####PROVEEDOR#####
 
-#MATES
+#####MATES#####
 def mates(request):
     if request.method=='POST':
         form=mateForms(request.POST)
@@ -106,11 +109,42 @@ def eliminarMate(request, id):
     mat.delete()
     mats=mate.objects.all()
     return render(request, 'AppPrueba/leermates.html', {'mats':mats})
+#####MATES#####
+
+#LOGIN-LOGOUT-REGISTER
+def login_request(request):
+    if request.method=='POST':
+        form=AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            usu=request.POST['username']
+            clave=request.POST['password']
+            usuario=authenticate(username=usu, password=clave)
+            if usuario is not None:
+                login(request, usuario)
+                return render(request, 'AppPrueba/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
+            else:
+                return render(request, 'AppPrueba/login.html', {'formulario':form, 'mensaje':f'Usuario o contraseña incorrectos'})
+        else:
+            return render(request, 'AppPrueba/login.html', {'formulario':form, 'mensaje':f'Usuario o contraseña incorrectos'})
+    else:
+        form=AuthenticationForm()
+        return render(request, 'AppPrueba/login.html', {'formulario':form})
+
+def register(request):
+    if request.method=='POST':
+        form=UserRegisterForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data.get('username')
+            form.save()
+            return render(request, 'AppPrueba/inicio.html', {'mensaje':f'Usuario {username} creado correctamente'})
+        else:
+            return render(request, 'AppPrueba/register.html', {'formulario':form, 'mensaje':'FORMULARIO INVALIDO'})
+    else:
+        form=UserRegisterForm()
+        return render(request, 'AppPrueba/register.html', {'formulario':form})
 
 
 
-
-            
 
 
 
