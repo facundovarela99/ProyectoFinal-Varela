@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def inicio(request):
@@ -142,7 +142,27 @@ def register(request):
     else:
         form=UserRegisterForm()
         return render(request, 'AppPrueba/register.html', {'formulario':form})
+#LOGIN-LOGOUT-REGISTER
 
+@login_required
+def editarPerfil(request):
+    usuario=request.user
+    if request.method=='POST':
+        form=UserEditForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            usuario.first_name=info['first_name']
+            usuario.last_name=info['last_name']
+            usuario.email=info['email']
+            usuario.password1=info['password1']
+            usuario.password2=info['password2']
+            usuario.save()
+            return render(request, 'AppPrueba/inicio.html', {'mensaje':'Perfil editado correctamente'})
+        else:
+            return render(request, 'AppPrueba/editarPerfil.html', {'formulario':form, 'usuario':usuario, 'mensaje':'FORMULARIO INVALIDO'})
+    else:
+        form= UserEditForm(instance=usuario)
+    return render(request, 'AppPrueba/editarPerfil.html', {'formulario':form, 'usuario':usuario})
 
 
 

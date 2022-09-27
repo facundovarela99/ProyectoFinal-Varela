@@ -1,0 +1,19 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">EDITAR PERFIL DE {{ usuario }}</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>FORMULARIO DE EDICION</h2>
+<h3>{{ mensaje }}</h3>
+<form action="{% url 'editarPerfil' %}" method="Post"> {% csrf_token %}
+   
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <input type="submit" value="Guardar">
+</form>
+{% endblock %}
