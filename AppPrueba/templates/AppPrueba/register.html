@@ -3,11 +3,11 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">FORMULARIO DE REGISTRO</h1>
+<h1 class="mb-5" style="color:black">FORMULARIO DE REGISTRO</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>FORMULARIO DE REGISTRO</h1>
+<h2>INGRESAR DATOS</h2>
 <form action="{% url 'register' %}" method="Post"> {% csrf_token %}
    
     <table>

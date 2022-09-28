@@ -8,8 +8,14 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
 def inicio(request):
-    return render (request, 'AppPrueba/inicio.html')
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        avatar=lista[0].imagen.url
+    else:
+        avatar=None
+    return render (request, 'AppPrueba/inicio.html', {'avatar':avatar})
 
 
 #####YERBA#####
