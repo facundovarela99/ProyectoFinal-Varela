@@ -10,12 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def inicio(request):
-    lista=Avatar.objects.filter(user=request.user)
-    if len(lista)!=0:
-        avatar=lista[0].imagen.url
-    else:
-        avatar=None
-    return render (request, 'AppPrueba/inicio.html', {'avatar':avatar})
+    return render (request, 'AppPrueba/inicio.html', {'avatar':obtenerAvatar(request)})
 
 
 #####YERBA#####
@@ -147,7 +142,7 @@ def register(request):
             return render(request, 'AppPrueba/register.html', {'formulario':form, 'mensaje':'FORMULARIO INVALIDO'})
     else:
         form=UserRegisterForm()
-        return render(request, 'AppPrueba/register.html', {'formulario':form})
+        return render(request, 'AppPrueba/register.html', {'formulario':form, 'avatar':obtenerAvatar(request)})
 #LOGIN-LOGOUT-REGISTER
 
 @login_required
@@ -168,15 +163,32 @@ def editarPerfil(request):
             return render(request, 'AppPrueba/editarPerfil.html', {'formulario':form, 'usuario':usuario, 'mensaje':'FORMULARIO INVALIDO'})
     else:
         form= UserEditForm(instance=usuario)
-    return render(request, 'AppPrueba/editarPerfil.html', {'formulario':form, 'usuario':usuario})
+    return render(request, 'AppPrueba/editarPerfil.html', {'formulario':form, 'usuario':usuario, 'avatar':obtenerAvatar(request)})
 
+@login_required
+def agregarAvatar(request):
+    if request.method=='POST':
+        formulario=AvatarForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            avatarViejo=Avatar.objects.filter(user=request.user)
+            if(len(avatarViejo)>0):
+                avatarViejo[0].delete()
+            avatar=Avatar(user=request.user, imagen=formulario.cleaned_data['imagen'])
+            avatar.save()
+            return render(request, 'AppPrueba/inicio.html', {'usuario':request.user, 'mensaje':'AVATAR AGREGADO EXITOSAMENTE'})
+        else:
+            return render(request, 'AppPrueba/agregarAvatar.html', {'formulario':formulario, 'mensaje':'FORMULARIO INVALIDO'})
+    else:
+        formulario=AvatarForm()
+        return render(request, 'AppPrueba/agregarAvatar.html', {'formulario':formulario, 'usuario':request.user})
 
-
-
-
-
-
-
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        imagen=lista[0].imagen.url
+    else:
+        imagen=""
+    return imagen
 
 
 
