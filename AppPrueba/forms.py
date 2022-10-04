@@ -15,16 +15,6 @@ class mateForms(forms.Form):
 class proveedoresForms(forms.Form):
     nombre=forms.CharField(max_length=50)
 
-class UserRegisterForm(UserCreationForm):
-    email= forms.EmailField
-    password1 = forms.CharField(label='Ingrese Contraseña', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repita Contraseña', widget=forms.PasswordInput)
-    
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
-        help_texts = {k:'' for k in fields}
-
 class UserEditForm(UserCreationForm):
     first_name=forms.CharField(label='Modificar nombre')
     last_name=forms.CharField(label='Modificar apellido')
@@ -39,3 +29,4 @@ class UserEditForm(UserCreationForm):
 
 class AvatarForm(forms.Form):
     imagen = forms.ImageField(label='Imagen')
+

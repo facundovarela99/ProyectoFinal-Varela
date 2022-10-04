@@ -9,7 +9,8 @@
 {% block contenido_que_cambia %}
 <h1>PAGINA OFICIAL - El Matienzo</h1>
 
-<img src="{{ avatar }}" alt="">
+<img height="200px" src="{{ avatar }}" alt="">
+<a class="btn btn-success" href="{% url 'agregarAvatar' %}">Avatar</a>
 
 <h2>{{ mensaje }}</h2>
 {% endblock %}

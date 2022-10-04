@@ -28,17 +28,20 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">Home</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">Sample Post</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></h4></li>
-                        {% if staff.is_authenticated %}
-                        <h4> hola {{ staff.username }}</h4>
+                        
+                        {% if user.is_authenticated %}
                         <img height="40px" src="{{ avatar }}" alt="">
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
+                        
+                        
                         {% else %}
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Entrar</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></h4></li>
+                        
                         {% endif %}
                     </ul>
                 </div>
@@ -69,8 +72,10 @@
                     <!-- Post preview-->
                     <div class="post-preview">
                         <a href="post.html">
+                            {% if user.is_authenticated %}
+                            <img height="250px" src="{% static 'AppPrueba/assets/img/MATECHICA.jpg' %}" alt="">    
                             <h2 class="post-title">El día no comienza bien, sin un buen mate con yerba de ayer</h2>
-            
+                            
                         </a>
                         <p class="post-meta">
                             Posted by
@@ -82,9 +87,11 @@
                     <hr class="my-4" />
                     <!-- Post preview-->
                     <div class="post-preview">
-                        <a href="post.html"><h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
-                        <p class="post-meta">
-                            Posted by
+                        <a href="post.html">
+                            <img height="250px" src="{% static 'AppPrueba/assets/img/MATE.jpg' %}" alt="">
+                            <h2 class="post-title">I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.</h2></a>
+                            <p class="post-meta">
+                             Posted by
                             <a href="#!">Start Bootstrap</a>
                             on September 18, 2022
                         </p>
@@ -121,6 +128,9 @@
                     <hr class="my-4" />
                     <!-- Pager-->
                     <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                    {% else %}
+                    <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
+                    {% endif %}
                 </div>
             </div>
         </div>
