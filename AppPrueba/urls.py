@@ -18,8 +18,7 @@ urlpatterns = [
     #mates
     path('leermates/', leermates, name = 'leermates'),
     path('eliminarMate/<id>', eliminarMate, name = 'eliminarMate'),
-    #login-logout-register
-    path('login/', login_request, name = 'login'),
+    #logout
     path('logout/', LogoutView.as_view(template_name='AppPrueba/logout.html'), name='logout'),
     path('editarPerfil/', editarPerfil, name='editarPerfil'),
     #avatar

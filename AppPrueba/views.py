@@ -3,8 +3,7 @@ from .models import *
 from AppPrueba.forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -113,23 +112,7 @@ def eliminarMate(request, id):
 #####MATES#####
 
 #LOGIN-LOGOUT-REGISTER
-def login_request(request):
-    if request.method=='POST':
-        form=AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            usu=request.POST['username']
-            clave=request.POST['password']
-            usuario=authenticate(username=usu, password=clave)
-            if usuario is not None:
-                login(request, usuario)
-                return render(request, 'AppPrueba/inicio.html', {'mensaje':f'Bienvenido {usuario}'})
-            else:
-                return render(request, 'AppPrueba/login.html', {'formulario':form, 'mensaje':f'Usuario o contraseña incorrectos'})
-        else:
-            return render(request, 'AppPrueba/login.html', {'formulario':form, 'mensaje':f'Usuario o contraseña incorrectos'})
-    else:
-        form=AuthenticationForm()
-        return render(request, 'AppPrueba/login.html', {'formulario':form})
+
 
 
 #LOGIN-LOGOUT-REGISTER
