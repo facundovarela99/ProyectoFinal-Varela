@@ -1,30 +1,13 @@
-{% extends 'AppPrueba/padre.html' %}
+{% extends 'AppPrueba/index-2.html' %}
 
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">LISTADO DE YERBAS</h1>
+<h1 class="mb-5" style="color:green">LISTADO DE YERBAS</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>YERBAS</h1>
-{% if yerbillas %}
 
-<ul>
-    {% for i in yerbillas %}
-       <h4>{{i.nombre}} - {{i.tipo}} - {{i.fecha_vencimiento}}</h4>
-       <a class="btn btn-danger" href="{% url 'eliminarYerba' i.id %}">Eliminar</a>
-       <a class="btn btn-primary" href="{% url 'editarYerba' i.id %}">Editar</a>
-       
-        <br>
-    {% endfor %}   
 
-</ul>
-
-{% else %}
-<p>NO SE ENCONTRARON YERBAS</p>
-
-{% endif %}
-<a class="btn btn-primary" href="{% url 'yerbas' %}">Agregar Yerba</a>
 
 {% endblock %}

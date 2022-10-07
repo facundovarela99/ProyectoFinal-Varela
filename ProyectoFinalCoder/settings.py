@@ -125,7 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/AppPrueba/login'
+LOGIN_URL = '/login'
 
 
 MEDIA_URL = '/media/'

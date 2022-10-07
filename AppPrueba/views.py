@@ -31,7 +31,7 @@ def yerbasSAPE(request):
 
 def leeryerbas(request):
     yerbillas=yerba.objects.all()
-    return render (request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas})
+    return render (request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas, 'avatar':obtenerAvatar(request)})
 
 def editarYerba(request, id):
     yerbilla=yerba.objects.get(id=id) #playground avanzado part 1 CRUD (38:02)
