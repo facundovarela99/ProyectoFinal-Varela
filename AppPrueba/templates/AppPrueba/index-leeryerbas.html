@@ -21,7 +21,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a style="color:black" class="navbar-brand" href="index.html">Start Bootstrap</a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -70,6 +70,7 @@
             <div class="row gx-4 gx-lg-5 justify-content-flex-start">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
+                    {% if user.is_staff %}
                     <img height="200px" src="{{ avatar }}" alt="">
                     <h1>YERBAS</h1>
                     
@@ -99,26 +100,11 @@
                         <p class="post-meta">
                             
                         </p>
-                    
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            
-                        </p>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="post.html">
-                            
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="post-preview">
+                    {% else %}
+                    <h4>PANEL DE ADMINISTRADOR. ACCESO DENEGADO</h4>
+                        
+                    {% endif %}
+                   
                         
                     </div>
                     

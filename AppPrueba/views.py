@@ -3,6 +3,7 @@ from .models import *
 from AppPrueba.forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
+from django.contrib.auth.admin import UserAdmin
 
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -11,8 +12,12 @@ from django.contrib.auth.decorators import login_required
 def inicio(request):
     return render (request, 'AppPrueba/inicio.html', {'avatar':obtenerAvatar(request)})
 
+"""def about(request):
+    return render(request, 'AppPrueba/about.html')""" #pendiente
+
 
 #####YERBA#####
+@login_required
 def yerbasSAPE(request):
     if request.method=='POST':
         form=yerbaForms(request.POST)
@@ -29,12 +34,16 @@ def yerbasSAPE(request):
         form=yerbaForms()
     return render (request, 'AppPrueba/yerbas.html', {'formulario':form})
 
+@login_required
 def leeryerbas(request):
     yerbillas=yerba.objects.all()
     return render (request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas, 'avatar':obtenerAvatar(request)})
+    
 
+@login_required
 def editarYerba(request, id):
     yerbilla=yerba.objects.get(id=id) #playground avanzado part 1 CRUD (38:02)
+    yerbillas=yerba.objects.all()
     if request.method=='POST':
         form=yerbaForms(request.POST)
         if form.is_valid():
@@ -47,9 +56,9 @@ def editarYerba(request, id):
             return render(request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas})
     else:
         form=yerbaForms(initial={'nombre':yerbilla.nombre, 'tipo':yerbilla.tipo, 'fecha_vencimiento':yerbilla.fecha_vencimiento})
-        return render(request, 'AppPrueba/editarYerba.html', {'formulario':form, 'yerbilla':yerbilla})
+        return render(request, 'AppPrueba/editarYerba.html', {'formulario':form, 'yerbilla':yerbilla, 'yerbillas':yerbillas})
 
-
+@login_required
 def eliminarYerba(request, id):
     yerbilla=yerba.objects.get(id=id)
     yerbilla.delete()
@@ -58,6 +67,7 @@ def eliminarYerba(request, id):
 #####YERBA#####
 
 #####PROVEEDOR#####
+@login_required
 def proveedor(request):
     if request.method=='POST':
         form=proveedoresForms(request.POST)
@@ -72,10 +82,12 @@ def proveedor(request):
         form=proveedoresForms
     return render (request, 'AppPrueba/proveedor.html', {'formulario':form})
 
+@login_required
 def leerproveedores(request):
     provs=proveedores.objects.all()
     return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs})
 
+@login_required
 def eliminarProveedor(request, id):
     proveedor=proveedores.objects.get(id=id)
     proveedor.delete()
@@ -84,6 +96,7 @@ def eliminarProveedor(request, id):
 #####PROVEEDOR#####
 
 #####MATES#####
+@login_required
 def mates(request):
     if request.method=='POST':
         form=mateForms(request.POST)
@@ -100,10 +113,12 @@ def mates(request):
         form=mateForms
     return render (request, 'AppPrueba/mate.html', {'formulario':form})
 
+@login_required
 def leermates(request):
     mats=mate.objects.all()
     return render(request, 'AppPrueba/leermates.html', {'mats':mats})
 
+@login_required
 def eliminarMate(request, id):
     mat=mate.objects.get(id=id)
     mat.delete()
@@ -162,6 +177,7 @@ def obtenerAvatar(request):
         imagen="/media/avatares/avatarpordefecto.png"
     return imagen
 
+#CBV
 
 
 
