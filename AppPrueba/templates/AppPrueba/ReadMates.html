@@ -1,0 +1,23 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:darkslategrey">LISTADO DE MATES</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+{% if user.is_authenticated %}
+<h1>MATES</h1>
+
+<ul>
+    {% for int in object_list %}
+       <li><strong>{{ int }}</strong></li>
+        <br>
+    {% endfor %}    
+</ul>
+
+{% else %}
+
+{% endif %}
+{% endblock %}

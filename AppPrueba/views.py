@@ -56,7 +56,7 @@ def editarYerba(request, id):
             return render(request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas})
     else:
         form=yerbaForms(initial={'nombre':yerbilla.nombre, 'tipo':yerbilla.tipo, 'fecha_vencimiento':yerbilla.fecha_vencimiento})
-        return render(request, 'AppPrueba/editarYerba.html', {'formulario':form, 'yerbilla':yerbilla, 'yerbillas':yerbillas})
+        return render(request, 'AppPrueba/editarYerba.html', {'formulario':form, 'yerbilla':yerbilla, 'yerbillas':yerbillas, 'avatar':obtenerAvatar(request)})
 
 @login_required
 def eliminarYerba(request, id):
@@ -77,7 +77,7 @@ def proveedor(request):
             prov=proveedores(nombre=nombre)
             prov.save()
             provs=proveedores.objects.all()
-            return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs})
+            return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs, 'avatar':obtenerAvatar(request)})
     else:
         form=proveedoresForms
     return render (request, 'AppPrueba/proveedor.html', {'formulario':form})
@@ -85,7 +85,7 @@ def proveedor(request):
 @login_required
 def leerproveedores(request):
     provs=proveedores.objects.all()
-    return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs})
+    return render (request, 'AppPrueba/leerproveedores.html', {'provs':provs, 'avatar':obtenerAvatar(request)})
 
 @login_required
 def eliminarProveedor(request, id):
@@ -108,7 +108,7 @@ def mates(request):
             mat=mate(nombre=nombre, tipo=tipo, cantidad_x_caja=cantidad_x_caja)
             mat.save()
             mats=mate.objects.all()
-            return render (request, 'AppPrueba/leermates.html', {'mats':mats})
+            return render (request, 'AppPrueba/leermates.html', {'mats':mats, 'avatar':obtenerAvatar(request)})
     else:
         form=mateForms
     return render (request, 'AppPrueba/mate.html', {'formulario':form})
@@ -116,7 +116,7 @@ def mates(request):
 @login_required
 def leermates(request):
     mats=mate.objects.all()
-    return render(request, 'AppPrueba/leermates.html', {'mats':mats})
+    return render(request, 'AppPrueba/leermates.html', {'mats':mats, 'avatar':obtenerAvatar(request)})
 
 @login_required
 def eliminarMate(request, id):
@@ -178,8 +178,17 @@ def obtenerAvatar(request):
     return imagen
 
 #CBV
+class YerbasList(ListView):
+    model = yerba
+    template_name = 'AppPrueba/ReadYerbas.html'
 
+class YerbaDetalle(DetailView): #DEVUELVE CAMPOS VACIOS (?) SOLUCIONADO
+    model = yerba
+    template_name = 'AppPrueba/yerbadetalle.html'
 
+class MatesList(ListView):
+    model = mate
+    template_name = 'AppPrueba/ReadMates.html'
 
 
 

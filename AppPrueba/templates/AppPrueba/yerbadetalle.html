@@ -1,0 +1,19 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:rgb(0, 87, 0)">DATOS DE YERBA</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+{% if user.is_authenticated %}
+
+<h5><strong>NOMBRE : <i>{{yerba.nombre}}</i></strong></h5>
+<h5><strong>APELLIDO : <i>{{yerba.tipo}}</i></strong></h5>
+<h5><strong>FECHA DE VENCIMIENTO : <i>{{yerba.fecha_vencimiento}}</i></strong></h5>
+
+{% else %}
+
+{% endif %}
+{% endblock %}

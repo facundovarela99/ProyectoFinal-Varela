@@ -1,30 +1,12 @@
-{% extends 'AppPrueba/padre.html' %}
+{% extends 'AppPrueba/index-leerproveedores.html' %}
 
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5">LISTADO DE PROVEEDORES</h1>
+<h1 class="mb-5" style="color:gold">LISTADO DE PROVEEDORES</h1>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h1>PROVEEDORES</h1>
-{% if provs %}
 
-<ul>
-    {% for i in provs %}
-       <h4>{{i.nombre}}</h4>
-       <a class="btn btn-danger" href="{% url 'eliminarProveedor' i.id %}">Eliminar</a>
-       
-       
-        <br>
-    {% endfor %}   
-
-</ul>
-
-{% else %}
-<p>NO SE ENCONTRARON PROVEEDORES</p>
-
-{% endif %}
-<a class="btn btn-primary" href="{% url 'proveedor' %}">Agregar Proveedor</a>
 
 {% endblock %}

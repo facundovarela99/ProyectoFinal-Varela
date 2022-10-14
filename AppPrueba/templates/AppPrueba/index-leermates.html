@@ -30,13 +30,13 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></h4></li>
                         
                         {% if user.is_authenticated %}
                         <img height="40px" src="{{ avatar }}" alt="">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
-                         
+                        
                         
                         {% else %}
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Entrar</a></h4></li>
@@ -57,7 +57,6 @@
                         
                         
                         {% endif %}
-
                     </ul>
                 </div>
             </div>
@@ -82,77 +81,47 @@
 
         {% endblock %}
         <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-end">
+            <div class="row gx-4 gx-lg-5 justify-content-flex-start">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                    {% if user.is_authenticated %}
-                    <div class="post-preview">
-                        <nav class="navbar navbar-light bg-light static-top">
-                            <div class="container">
-                                <h2>Lista de yerbas</h2>
-                                <a class="btn btn-success" href="{% url 'yerbas_listar' %}">Yerbas</a>
-                                <h2>Lista de mates</h2>
-                                <a class="btn btn-primary" href="{% url 'mates_listar' %}">Mates</a>
-                            </div>
-                        </nav>
+                    {% if user.is_staff %}
+                    <img height="200px" src="{{ avatar }}" alt="">
+                    <h1>MATES</h1>
+                    
+        
+                        {% if mats %}
+
+                        <ul>
+                            {% for i in mats %}
+                            <h4>{{i.nombre}} - {{i.tipo}} - {{i.cantidad_x_caja}}</h4>
+                            <a class="btn btn-danger" href="{% url 'eliminarMate' i.id %}">Eliminar</a>
+                            
+                            
+                            
+                                <br>
+                            {% endfor %}   
                         
-                        <a>
-                            <img height="250px" src="{% static 'AppPrueba/assets/img/MATECHICA.jpg' %}" alt="">    
-                            <h2 class="post-title">El día no comienza bien, sin un buen mate con yerba de ayer</h2>
+                        </ul>
+                        
+                        {% else %}
+                        <p>NO SE ENCONTRARON MATES</p>
+                        
+                        {% endif %}
+                        <a class="btn btn-primary" href="{% url 'mates' %}">Agregar Mate</a>
+                                                            
                             
                         </a>
                         <p class="post-meta">
-                            Posted by
-                            <a>Facu Varela</a>
-                            on September 29, 2022
+                            
                         </p>
-                    </div>
-                </div>
-            </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <div class="row gx-4 gx-lg-5 justify-content-flex-start">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                            <div class="post-preview">
-                                <p>
-                                    <img height="250px" src="{% static 'AppPrueba/assets/img/MATE.jpg' %}" alt="">
-                                    <h2 class="post-title">Creo que cada ser humano tiene un número finito de sorbos. No tengo la intención de desperdiciar ninguno de los míos.</h2></a>
-                                    <p class="post-meta">
-                                    Posted by
-                                    <a>Fede Hanley</a>
-                                    on October 5, 2022
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="row gx-4 gx-lg-5 justify-content-end">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                            <div class="post-preview">
-                                    
-                                    <img height="250px" src="{% static 'AppPrueba/assets/img/MATEESTUDIO.jpg' %}" alt="">
-                                    <h2 class="post-title">El mate y el estudio son como uña y dedo, van de la mano</h2>
-                                
-                                <p class="post-meta">
-                                    Posted by
-                                    Start Bootstrap</a>
-                                    on August 24, 2022
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    
-                   
-                    <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
                     {% else %}
-                    <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
+                    <h4>PANEL DE ADMINISTRADOR. ACCESO DENEGADO</h4>
+                        
                     {% endif %}
+                   
+                        
+                    </div>
+                    
                 </div>
             </div>
         </div>
