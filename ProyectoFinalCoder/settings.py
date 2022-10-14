@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'AppPrueba',
     'AppRegistro',
     'AppLogin',
+    'DM',
 ]
 
 MIDDLEWARE = [
