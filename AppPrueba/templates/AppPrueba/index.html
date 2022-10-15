@@ -96,15 +96,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     {% if user.is_authenticated %}
-                    <div class="post-preview">
-                        <nav class="navbar navbar-light bg-light static-top">
-                            <div class="container">
-                                <h2>Lista de yerbas</h2>
-                                <a class="btn btn-success" href="{% url 'yerbas_listar' %}">Yerbas</a>
-                                <h2>Lista de mates</h2>
-                                <a class="btn btn-primary" href="{% url 'mates_listar' %}">Mates</a>
-                            </div>
-                        </nav>
+                    
                         
                         <a>
                             <img height="250px" src="{% static 'AppPrueba/assets/img/MATECHICA.jpg' %}" alt="">    
@@ -197,7 +189,8 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                        <div class="small text-center text-muted fst-italic">Desarrolladores: Facundo Varela y Federico Hanley</div>
+                        <div class="small text-center text-muted fst-italic">facundovarela88@hotmail.com  /  Federicohanley.fh@gmail.com </div>
                     </div>
                 </div>
             </div>
