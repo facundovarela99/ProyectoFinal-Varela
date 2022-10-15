@@ -23,6 +23,7 @@ urlpatterns = [
     path ('', include ('AppPrueba.urls')),
     path ('', include ('AppRegistro.urls')),
     path ('', include ('AppLogin.urls')),
+    path ('', include ('DM.urls')),
 
 ]
 
