@@ -12,9 +12,8 @@ from django.contrib.auth.decorators import login_required
 def inicio(request):
     return render (request, 'AppPrueba/inicio.html', {'avatar':obtenerAvatar(request)})
 
-"""def about(request):
-    return render(request, 'AppPrueba/about.html')""" #pendiente
-
+def about(request):
+    return render (request, 'AppPrueba/about.html')
 
 #####YERBA#####
 @login_required

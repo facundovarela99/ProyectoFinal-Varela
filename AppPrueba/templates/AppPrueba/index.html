@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Clean Blog - El Matienzo</title>
+        <title>El Matienzo</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -28,17 +28,33 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></h4></li>
+                        
                         
                         {% if user.is_authenticated %}
+<<<<<<< HEAD
                         <img height="40px" src="{{ avatar }}" alt="">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Contact</a></h4></li>
+=======
+                        
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'yerbas_listar' %}">Yerbas</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'mates_listar' %}">Mates</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></h4></li>
+
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4"href="{% url 'editarPerfil' %}"</a>Hola {{ user.username }}</a></h4></li>
+                        <img height="40px" src="{{ avatar }}" alt="">
+
+
+
+>>>>>>> main
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
                          
                         
                         {% else %}
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">About</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Entrar</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></h4></li>
                         
@@ -68,7 +84,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1 style="color:black">Clean Blog</h1>
+                            <h2 style="color:black"></h1>
                             {% block titulo %}
                             
                             {% endblock %}
@@ -81,26 +97,20 @@
         {% block contenido_que_cambia %}
 
         {% endblock %}
+        {% block contenido_que_cambia_notas %}
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-end">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     {% if user.is_authenticated %}
-                    <div class="post-preview">
-                        <nav class="navbar navbar-light bg-light static-top">
-                            <div class="container">
-                                <h2>Lista de yerbas</h2>
-                                <a class="btn btn-success" href="{% url 'yerbas_listar' %}">Yerbas</a>
-                                <h2>Lista de mates</h2>
-                                <a class="btn btn-primary" href="{% url 'mates_listar' %}">Mates</a>
-                            </div>
-                        </nav>
+                    
                         
                         <a>
                             <img height="250px" src="{% static 'AppPrueba/assets/img/MATECHICA.jpg' %}" alt="">    
                             <h2 class="post-title">El día no comienza bien, sin un buen mate con yerba de ayer</h2>
                             
                         </a>
+                        
                         <p class="post-meta">
                             Posted by
                             <a>Facu Varela</a>
@@ -149,45 +159,19 @@
                     <!-- Post preview-->
                     
                    
-                    <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                    <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Inicio</a></div>
                     {% else %}
                     <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
                     {% endif %}
                 </div>
             </div>
         </div>
+        {% endblock %}
         <!-- Footer-->
         <footer class="border-top">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x"></i>
-                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+        
+                        <div class="small text-center text-muted fst-italic">Desarrolladores: Facundo Varela y Federico Hanley</div>
+                        <div class="small text-center text-muted fst-italic">facundovarela88@hotmail.com  /  Federicohanley.fh@gmail.com </div>
                     </div>
                 </div>
             </div>
