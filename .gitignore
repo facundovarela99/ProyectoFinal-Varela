@@ -50,3 +50,4 @@ coverage.xml
 docs/_build/
 
 *.sqlite3
+db.sqlite3
