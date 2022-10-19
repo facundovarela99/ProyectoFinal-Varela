@@ -1,0 +1,107 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:black">CANAL DE MENSAJERIA</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<h2>CHAT</h2>
+
+
+
+
+<h1>Mensajes del canal</h1>
+
+<div id="contenedor_ms"></div>
+{% for mensaje in object.canalmensaje_set.all %}
+
+{% if request.user == mensaje.usuario %}
+
+<p>
+    <strong>
+        {{mensaje.texto}}
+    </strong>
+    <span>
+        lo enviaste tu
+        
+    </span>
+
+</p>
+
+{% else %}
+<p>
+    <strong>
+
+        {{mensaje.texto}}
+    </strong>
+    <span>
+
+        {{mensaje.usuario}}
+    </span>
+</p>
+    
+{% endif %}
+
+
+{% endfor %}
+
+<h1>Usuarios del canal</h1>
+{% for usuarios in object.canalusuario_set.all %}
+    <p>
+        
+        {{usuarios.usuario}}
+    </p>
+
+{% endfor %}
+
+    <form id='form_submit' action='{{ request.path }}' method="POST">
+        {% csrf_token %}
+
+        {{form.as_p}}
+        <button type="submit">
+            Enviar
+        </button>
+    </form>
+
+<script>
+    const MsgForm =  document.getElementbyId('form_submit')
+    const msgContainer = document.getElementById('contenedor_ms')
+    
+    MsgForm.addEventListener('submit', (event) => {
+    
+    event.preventDefault()
+    const targetDate= event.target 
+    const formData = new FormData(targetDate)
+    const xhr = new XMLHttpRequest() 
+
+    const endpoint = MsgForm.getAttribute('action')
+    const method = MsgForm.getAttribute('method')
+    xhr.open(method, endpoint)
+    xhr.responseType = 'json'
+    xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+    xhr.onload = () => {
+
+        console.log(xhr.status, xhr.response)
+
+        if(xhr.status === 201){
+            const respuestaData = xhr.response
+            let actualMensajeHtml = msgContainer.innerHTML
+            actualMensajeHtml += `<div class=''><b>${respuestaData.username}</b><p>
+                ${respuestaData.mensaje}</p></div>`
+            msgContainer.innerHTML = actualMensajeHtml
+            MsgForm.reset()
+        }else if(xhr.status === 400){
+            console.log(hxr.response)
+        }else{
+            alert('Ocurrio un error, reintentar luego')
+        }
+    }
+
+    xhr.send(formData)
+
+    })
+</script>
+{% endblock %}

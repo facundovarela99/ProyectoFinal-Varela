@@ -31,6 +31,11 @@
                         
                         
                         {% if user.is_authenticated %}
+<<<<<<< HEAD
+                        <img height="40px" src="{{ avatar }}" alt="">
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Contact</a></h4></li>
+=======
                         
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'yerbas_listar' %}">Yerbas</a></h4></li>
@@ -43,6 +48,7 @@
 
 
 
+>>>>>>> main
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
                          
                         
