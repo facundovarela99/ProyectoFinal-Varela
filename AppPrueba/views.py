@@ -32,7 +32,8 @@ def yerbasSAPE(request):
             return render (request, 'AppPrueba/leeryerbas.html', {'yerbillas':yerbillas})
     else:
         form=yerbaForms()
-    return render (request, 'AppPrueba/yerbas.html', {'formulario':form})
+        yerbillas=yerba.objects.all()
+    return render (request, 'AppPrueba/yerbas.html', {'formulario':form, 'yerbillas':yerbillas})
 
 @login_required
 def leeryerbas(request):
