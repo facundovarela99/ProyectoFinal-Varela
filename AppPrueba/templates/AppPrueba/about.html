@@ -1,0 +1,67 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:rgb(7, 37, 37)">Conocenos</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+Desarrolladores del Blog:
+
+
+{% endblock %}
+{% block contenido_que_cambia_notas %}
+{% if user.is_authenticated %}
+           <!-- Divider-->
+           <hr class="my-4" />
+           <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+               <div class="col-md-10 col-lg-8 col-xl-7">          
+                        
+                        <a>
+                            <img height="250px" src="{% static 'AppPrueba/assets/img/IMG_0027.jpg' %}" alt="">    
+                            <h2 class="post-title">Federico Hanley</h2>
+                            
+                        </a>
+                        
+                        <a class="post-meta">
+                            
+                            <a>30 años - Magdalena - Estud de programacion/Unlp (Primer año)</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <!-- Post preview-->
+                            <div class="post-preview">
+                                <p>
+                                    <img height="250px" src="{% static 'AppPrueba/assets/img/Facu varela.jpeg' %}" alt="">
+                                    <h2 class="post-title">Facundo Varela</h2></a>
+                                    <p class="post-meta">
+                                    
+                                    <a>ver formato del textooooo</a>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <hr class="my-4" />
+                    <!-- Post preview-->
+                    
+                   
+                    <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
+                    {% else %}
+                    <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+{% endblock %}
+
+

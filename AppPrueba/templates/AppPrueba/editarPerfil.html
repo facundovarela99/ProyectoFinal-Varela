@@ -3,11 +3,12 @@
 {% load static %}
 
 {% block titulo %}
-<h1 class="mb-5" style="color:black">EDITAR PERFIL DE {{ usuario }}</h1>
+<h1 class="mb-5" style="color:black">Bienvenido {{ usuario }}git add</h1><img height="100px" src="{{ avatar }}" alt="">
+
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<h2>FORMULARIO DE EDICION</h2>
+<h2>Aqui puedes editar tus datos</h2>
 <h3>{{ mensaje }}</h3>
 <form action="{% url 'editarPerfil' %}" method="Post"> {% csrf_token %}
    
