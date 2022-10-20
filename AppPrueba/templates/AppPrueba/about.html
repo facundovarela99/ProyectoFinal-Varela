@@ -1,0 +1,72 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:rgb(7, 37, 37)">Conocenos</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<strong>Desarrolladores del Blog:</strong>
+
+{% if user.is_authenticated %}
+
+                <!-- Divider-->
+                <hr class="my-4" />
+                <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <!-- Post preview-->
+
+                <!-- Post preview-->
+                        <div class="post-preview">
+                            <p>
+                                <h2 class="post-title">Federico Hanley</h2></a>
+                                <p class="post-meta">
+                                
+                                <img height="250px" src="{% static 'AppPrueba/assets/img/fedecoder.jpg' %}" alt="">
+                                <h2 class="post-title">30 años - Magdalena - Estud de programacion/Unlp (Primer año)</h2></a>
+                                <p class="post-meta">
+                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+                            <div class="col-md-10 col-lg-8 col-xl-7">
+                                <!-- Post preview-->
+
+                        <!-- Post preview-->
+                                <div class="post-preview">
+                                    <p>
+                                        <h2 class="post-title">Facundo Varela</h2></a>
+                                        <p class="post-meta">
+                                        
+                                        <img height="250px" src="{% static 'AppPrueba/assets/img/facucoder.jpg' %}" alt="">
+                                        <h2 class="post-title">23 años - Mar del Plata - Est. de python/UNMDP.</h2></a>
+                                        <p class="post-meta">
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <hr class="my-4" />
+                        <!-- Post preview-->
+                        
+                        
+                        <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
+                        {% else %}
+                        <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+    {% endblock %}
+    
+    
+    
+    

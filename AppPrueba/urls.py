@@ -8,6 +8,7 @@ urlpatterns = [
     path('yerbas/', yerbasSAPE, name = 'yerbas'),
     path('proveedor/', proveedor, name = 'proveedor'),
     path('mates/', mates, name = 'mates'),
+    path('about/', about, name = 'about'),
     
     #yerbas
     path('leeryerbas/', leeryerbas, name = 'leeryerbas'),
