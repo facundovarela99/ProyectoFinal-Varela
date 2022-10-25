@@ -79,10 +79,6 @@ class CanalManager(models.Manager):
         return obj_canal, True
 
 class Canal(ModelBase):
-    #como funciona slak
-    #1 user
-    #2 users
-    #2+
 
     usuarios = models.ManyToManyField(User, blank=True, through=CanalUsuario)
     objects = CanalManager()

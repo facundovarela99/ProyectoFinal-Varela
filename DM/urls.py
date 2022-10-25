@@ -11,4 +11,5 @@ re_path(UUID_CANAL_REGEX, CanalDetailView.as_view()),
 path('dm/<str:username>', mensajes_privados, name='mensajes_privados'),
 path('ms/<str:username>', DetailMs.as_view(), name='DetailMs'),
 path('Inbox', Inbox.as_view(), name='Inbox'),
+path('buscar/', buscar, name='buscar'),
 ]

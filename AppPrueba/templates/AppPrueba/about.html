@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block contenido_que_cambia %}
+{% if user.is_authenticated %}
 
 <strong>Desarrolladores del Blog:</strong>
 
-{% if user.is_authenticated %}
 
                 <!-- Divider-->
                 <hr class="my-4" />
@@ -25,7 +25,7 @@
                                 <p class="post-meta">
                                 
                                 <img height="250px" src="{% static 'AppPrueba/assets/img/fedecoder.jpg' %}" alt="">
-                                <h2 class="post-title">30 años - Magdalena - Estud de programacion/Unlp (Primer año)</h2></a>
+                                <h2 class="post-title">30 años - Magdalena - Est. de programacion/Unlp (Primer año)</h2></a>
                                 <p class="post-meta">
                                 
                             </p>
@@ -65,8 +65,8 @@
                     </div>
                 </div>
             </div>
-    {% endblock %}
-    
+{% endblock %}
+            
     
     
     

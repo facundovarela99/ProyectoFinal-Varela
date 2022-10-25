@@ -13,5 +13,18 @@
 <a class="btn btn-success" href="{% url 'agregarAvatar' %}">Avatar</a>
 <a class="btn btn-primary" href="{% url 'editarPerfil' %}">Perfil</a>
 
+<h1>BUSQUEDA DE INTEGRANTES</h1>
+
+<form action="{% url 'buscar' %}" method='GET'>
+   
+    <input type="word" name="canalusuario" id="canalusuario">
+
+    <input type="submit" value="buscar">
+
+    <strong>{{ mensaje1 }}</strong>
+
+</form>
+<strong>{{ mensaje }}</strong>
+
 <h2>{{ mensaje }}</h2>
 {% endblock %}

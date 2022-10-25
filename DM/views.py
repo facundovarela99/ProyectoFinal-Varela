@@ -89,3 +89,15 @@ def mensajes_privados(request, username, *args, **kwargs):
     print(mensaje_canal.values('texto'))
     return HttpResponse(f'Nuestro id del canal - {canal.id}')
     
+def busquedaIntegrante(request):
+    return render(request, 'AppPrueba/busquedaCanal.html', {'mensaje1': 'Ingresar apellido del integrante'})
+
+def buscar(request):
+    if request.GET['username']:
+        username=request.GET['username']
+        canal, _ = Canal.objects.filter(username)
+        return render(request, 'AppPrueba/resultadosBusqueda.html', {'canal':canal})
+    else:
+        return render(request, 'AppPrueba/busquedaCanal.html', {'mensaje':'No se detectaron datos. Ingresar integrante'})
+
+        

@@ -198,10 +198,3 @@ class MatesList(ListView):
 
 
 
-
-
-#CBV
-# class yerbaCreacion(CreateView):
-#     model = yerba
-#     success_url = reverse_lazy('yerba_creacion')
-#     fields=['nombre', 'tipo', 'fecha_vencimiento']
