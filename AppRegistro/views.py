@@ -23,3 +23,7 @@ def obtenerAvatar(request):
     else:
         imagen="/media/avatares/avatarpordefecto.png"
     return imagen
+
+def leerUsuarios(request):
+    usuarios=User.objects.all()
+    return render (request, 'AppPrueba/leerusuarios.html', {'usuarios':usuarios, 'avatar':obtenerAvatar(request)})

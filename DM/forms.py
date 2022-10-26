@@ -6,3 +6,4 @@ class FormMensajes(forms.Form):
         'class': 'formulario_ms',
         'placeholder':'Escribe tu mensaje'
     }))
+

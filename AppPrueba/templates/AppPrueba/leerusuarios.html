@@ -1,0 +1,33 @@
+{% extends 'AppPrueba/index.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5" style="color:rgb(98, 98, 202)">LISTADO DE USUARIOS</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+{% if user.is_authenticated %}
+<h1>USUARIOS</h1>
+{% if usuarios %}
+
+<ul>
+    {% for usu in usuarios %}
+       <h4>{{usu.username}} - {{usu.first_name}} {{usu.last_name}} - {{usu.email}}</h4>
+       
+       <a class="btn btn-primary" href='{% url "DetailMs" usu.username %}'>Mensaje</a>
+       
+        <br>
+    {% endfor %}    
+</ul>
+
+{% else %}
+<p>NO SE ENCONTRARON INTEGRANTES</p>
+
+{% endif %}
+
+{% else %}
+
+{% endif %}
+
+{% endblock %}

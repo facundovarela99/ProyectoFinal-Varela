@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.admin import UserAdmin
 
+
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -14,7 +15,7 @@ def inicio(request):
 
 
 def about(request):
-    return render (request, 'AppPrueba/about.html')
+    return render (request, 'AppPrueba/about.html', {'avatar':obtenerAvatar(request)})
 
 
 #####YERBA#####
@@ -144,6 +145,8 @@ def editarPerfil(request):
             usuario.first_name=info['first_name']
             usuario.last_name=info['last_name']
             usuario.email=info['email']
+            usuario.edad=info['edad']
+            usuario.genero=info['genero']
             usuario.password1=info['password1']
             usuario.password2=info['password2']
             usuario.save()
