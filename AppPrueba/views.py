@@ -187,7 +187,7 @@ class YerbasList(ListView):
     model = yerba
     template_name = 'AppPrueba/ReadYerbas.html'
 
-class YerbaDetalle(DetailView): #DEVUELVE CAMPOS VACIOS (?) SOLUCIONADO
+class YerbaDetalle(DetailView): 
     model = yerba
     template_name = 'AppPrueba/yerbadetalle.html'
 

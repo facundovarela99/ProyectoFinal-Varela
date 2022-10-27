@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .forms import *
 from .models import *
+from AppPrueba.models import Avatar
 # Create your views here.
 
 def register(request):
@@ -17,7 +18,7 @@ def register(request):
         return render(request, 'AppPrueba/register.html', {'formulario':form})
 
 def obtenerAvatar(request):
-    lista=Avatarr.objects.filter(user=request.user)
+    lista=Avatar.objects.filter(user=request.user)
     if len(lista)!=0:
         imagen=lista[0].imagen.url
     else:

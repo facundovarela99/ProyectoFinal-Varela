@@ -8,12 +8,21 @@ from django.core.exceptions import PermissionDenied
 from .forms import FormMensajes
 from django.views.generic.edit import FormMixin
 from django.views.generic import View
+from AppPrueba.models import Avatar
 
 class Inbox(View):
     def get(self, request):
         inbox = Canal.objects.filter(canalusuario__usuario__in=[request.user.id])
         context = {'inbox':inbox}
         return render(request, 'AppPrueba/inbox.html', context)
+
+def obtenerAvatar(request):
+    lista=Avatar.objects.filter(user=request.user)
+    if len(lista)!=0:
+        imagen=lista[0].imagen.url
+    else:
+        imagen="/media/avatares/avatarpordefecto.png"
+    return imagen
 
 class CanalFormMixin(FormMixin):
     form_class = FormMensajes

@@ -21,10 +21,10 @@
 
             <a href='{% url "DetailMs" second_user.usuario.username %}'>
                 <p>
-                    {{second_user.usuario}}
+                    <strong>{{second_user.usuario}}</strong>
                 </p>
                 <small>
-                    ({{inbox.canalmensaje_set.count}}) Mensajes
+                    <strong>({{inbox.canalmensaje_set.count}}) Mensajes</strong>
                 </small>
             </a>
 
@@ -43,8 +43,9 @@
                     <p>
                         Usuario: {{ultimo_mensaje.usuario}}
                     </p>
+                    <hr class="my-4" />
                 {% endwith %}
-
+                
             </div>
         {% else %}
                 <p>
