@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import *
 from .models import *
 from AppPrueba.models import Avatar
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def register(request):
@@ -25,6 +26,7 @@ def obtenerAvatar(request):
         imagen="/media/avatares/avatarpordefecto.png"
     return imagen
 
+@login_required
 def leerUsuarios(request):
     usuarios=User.objects.all()
     return render (request, 'AppPrueba/leerusuarios.html', {'usuarios':usuarios, 'avatar':obtenerAvatar(request)})

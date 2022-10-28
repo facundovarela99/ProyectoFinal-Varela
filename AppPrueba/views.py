@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 def inicio(request):
     return render (request, 'AppPrueba/inicio.html', {'avatar':obtenerAvatar(request)})
 
-
+@login_required
 def about(request):
     return render (request, 'AppPrueba/about.html', {'avatar':obtenerAvatar(request)})
 

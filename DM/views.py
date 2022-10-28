@@ -9,6 +9,7 @@ from .forms import FormMensajes
 from django.views.generic.edit import FormMixin
 from django.views.generic import View
 from AppPrueba.models import Avatar
+from django.contrib.auth.decorators import login_required
 
 class Inbox(View):
     def get(self, request):

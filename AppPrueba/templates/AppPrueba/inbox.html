@@ -1,4 +1,4 @@
-{% extends 'AppPrueba/index.html' %}
+{% extends 'AppPrueba/index-inbox.html' %}
 
 {% load static %}
 
@@ -6,66 +6,5 @@
 <h1 style="color:black">El Matienzo</h1>
 {% endblock %}
 {% block contenido_que_cambia %}
-{% if user.is_authenticated %}
-    <h1>INBOX</h1>
 
-    {% for inbox in inbox %}
-    <div class="div_inbox">
-
-
-        {% for second_user in inbox.canalusuario_set.all %}
-        
-            {% if second_user.usuario == request.user %}
-
-            {% else %}
-
-            <a href='{% url "DetailMs" second_user.usuario.username %}'>
-                <p>
-                    <strong>{{second_user.usuario}}</strong>
-                </p>
-                <small>
-                    <strong>({{inbox.canalmensaje_set.count}}) Mensajes</strong>
-                </small>
-            </a>
-
-            {% endif %}
-
-        {% endfor %}
-
-        {% if inbox.canalmensaje_set.count != 0 %}
-            <div class="div_ms_inbox">
-                
-                {% with ultimo_mensaje=inbox.canalmensaje_set.last %}
-                    <p>
-                        Ultimo mensaje: {{ultimo_mensaje.texto}}
-                    </p>
-
-                    <p>
-                        Usuario: {{ultimo_mensaje.usuario}}
-                    </p>
-                    <hr class="my-4" />
-                {% endwith %}
-                
-            </div>
-        {% else %}
-                <p>
-                    No hay mensajes en nuestro inbox
-                </p>
-        {% endif %}
-    </div>
-    {% empty %}
-
-    <h2>
-        Inbox vacio
-    </h2>
-
-
-    {% endfor %}
-
-
-{% else %}
-
-<strong>Ingresar para visualizar contenido </strong>
-
-{% endif %}
 {% endblock %}

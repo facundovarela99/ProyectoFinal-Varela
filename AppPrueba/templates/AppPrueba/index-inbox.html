@@ -29,18 +29,17 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Sobre nosotros</a></h4></li>
                         
                         {% if user.is_authenticated %}
                         <img height="40px" src="{{ avatar }}" alt="">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Sobre nosotros</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'leerUsuarios' %}">Contacto</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Bandeja de mensajes</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
                         
                         
                         {% else %}
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Sobre nosotros</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">Entrar</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrarse</a></h4></li>
                         
@@ -59,7 +58,6 @@
                         
                         
                         {% endif %}
-
                     </ul>
                 </div>
             </div>
@@ -84,77 +82,77 @@
 
         {% endblock %}
         <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-end">
+            <div class="row gx-4 gx-lg-5 justify-content-flex-start">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                    {% if user.is_authenticated %}
-                    <div class="post-preview">
-                        <nav class="navbar navbar-light bg-light static-top">
-                            <div class="container">
-                                <h2>Lista de yerbas</h2>
-                                <a class="btn btn-success" href="{% url 'yerbas_listar' %}">Yerbas</a>
-                                <h2>Lista de mates</h2>
-                                <a class="btn btn-primary" href="{% url 'mates_listar' %}">Mates</a>
-                            </div>
-                        </nav>
-                        
-                        <a>
-                            <img height="250px" src="{% static 'AppPrueba/assets/img/MATECHICA.jpg' %}" alt="">    
-                            <h2 class="post-title">El día no comienza bien, sin un buen mate con yerba de ayer</h2>
-                            
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            <a>Facu Varela</a>
-                            on September 29, 2022
-                        </p>
-                    </div>
-                </div>
-            </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <div class="row gx-4 gx-lg-5 justify-content-flex-start">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                    <!-- Post preview-->
-                            <div class="post-preview">
-                                <p>
-                                    <img height="250px" src="{% static 'AppPrueba/assets/img/MATE.jpg' %}" alt="">
-                                    <h2 class="post-title">Creo que cada ser humano tiene un número finito de sorbos. No tengo la intención de desperdiciar ninguno de los míos.</h2></a>
-                                    <p class="post-meta">
-                                    Posted by
-                                    <a>Fede Hanley</a>
-                                    on October 5, 2022
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
-                    <div class="row gx-4 gx-lg-5 justify-content-end">
-                        <div class="col-md-10 col-lg-8 col-xl-7">
-                            <div class="post-preview">
-                                    
-                                    <img height="250px" src="{% static 'AppPrueba/assets/img/MATEESTUDIO.jpg' %}" alt="">
-                                    <h2 class="post-title">El mate y el estudio son como uña y dedo, van de la mano</h2>
-                                
-                                <p class="post-meta">
-                                    Posted by
-                                    Start Bootstrap</a>
-                                    on August 24, 2022
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    <!-- Post preview-->
                     
+                        {% if user.is_authenticated %}
+                            <h1>INBOX</h1>
+
+                            {% for inbox in inbox %}
+                            <div class="div_inbox">
+
+
+                                {% for second_user in inbox.canalusuario_set.all %}
+                                
+                                    {% if second_user.usuario == request.user %}
+
+                                    {% else %}
+
+                                    <a href='{% url "DetailMs" second_user.usuario.username %}'>
+                                        <p>
+                                            <strong>{{second_user.usuario}}</strong>
+                                        </p>
+                                        <small>
+                                            <strong>({{inbox.canalmensaje_set.count}}) Mensajes</strong>
+                                        </small>
+                                    </a>
+
+                                    {% endif %}
+
+                                {% endfor %}
+
+                                {% if inbox.canalmensaje_set.count != 0 %}
+                                    <div class="div_ms_inbox">
+                                        
+                                        {% with ultimo_mensaje=inbox.canalmensaje_set.last %}
+                                            <p>
+                                                Ultimo mensaje: {{ultimo_mensaje.texto}}
+                                            </p>
+
+                                            <p>
+                                                Usuario: {{ultimo_mensaje.usuario}}
+                                            </p>
+                                            <hr class="my-4" />
+                                        {% endwith %}
+                                        
+                                    </div>
+                                {% else %}
+                                        <p>
+                                            No hay mensajes en nuestro inbox
+                                        </p>
+                                {% endif %}
+                            </div>
+                            {% empty %}
+
+                            <h2>
+                                Inbox vacio
+                            </h2>
+
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+                        <strong>Ingresar para visualizar contenido </strong>
+
+                        {% endif %}
+
                    
-        
-                    {% else %}
-                    <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
-                    {% endif %}
+                        
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -165,9 +163,34 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <ul class="list-inline text-center">
                             <li class="list-inline-item">
-                                
-                                    <div class="small text-center text-muted">Desarrolladores: Facundo Varela y Federico Hanley</div>
-                                    <div class="small text-center text-muted">facundovarela88@hotmail.com  /  Federicohanley.fh@gmail.com </div>
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                    </div>
+                </div>
+            </div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
