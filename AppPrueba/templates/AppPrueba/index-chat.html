@@ -86,59 +86,36 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     
+                    <style>
+
+                        #contenedor_ms{
+                    
+                            width: 100%;
+                            background: #333;
+                        }
+                    
+                    </style>
+                    
+                    
                     <h2>CHAT</h2>
-
-
-
-
+                    
                     <h1>Mensajes del canal</h1>
                     
                     <div id="contenedor_ms"></div>
                     {% for mensaje in object.canalmensaje_set.all %}
-                    
-                    {% if request.user == mensaje.usuario %}
-                    
-                    <p>
-                        <strong>
-                            {{mensaje.texto}}
+                        <div class="div_ms {% if request.user == mensaje.usuario %}mis_mensajes
+                        {% else %} tus_mensajes {% endif %}">
+                            <strong>{{mensaje.usuario}}</strong>
+                            <h4>{{mensaje.texto}}</h4>
+                            <small>{{mensaje.tiempo}}</small>
                             
-                        </strong>
-                        
-                        <span>
-                            lo enviaste tu
-                            
-                            
-                            
-                        </span>
-                    
-                    </p>
-                    
-                    {% else %}
-                    <p>
-                        <strong>
-                    
-                            {{mensaje.texto}}
-                        </strong>
-                        <span>
-                    
-                            {{mensaje.usuario}}
-                        </span>
-                    </p>
-                        
-                    {% endif %}
-                    
+                        </div>
+                        <hr class="my-4" />
+                        <hr class="my-4" />
                     
                     {% endfor %}
                     
-                    <h1>Usuarios del canal</h1>
-                    {% for usuarios in object.canalusuario_set.all %}
-                        <p>
-                            
-                            {{usuarios.usuario}}
-                        </p>
-                    
-                    {% endfor %}
-                    
+                    <div class="div_form_ms">
                         <form id='form_submit' action='{{ request.path }}' method="POST">
                             {% csrf_token %}
                     
@@ -148,6 +125,9 @@
                             </button>
                         </form>
                     
+                    </div>
+                    
+                        
                     <script>
                         const MsgForm =  document.getElementbyId('form_submit')
                         const msgContainer = document.getElementById('contenedor_ms')
