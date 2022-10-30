@@ -16,7 +16,9 @@
         <br>
     {% endfor %}    
 </ul>
-
+<div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
+<strong>¿Le interesa nuestro contenido? Contactenos!:</strong>
+                        <a class="btn btn-success" href='{% url "leerUsuarios" %}'>Contactar</a>
 {% else %}
 
 {% endif %}
