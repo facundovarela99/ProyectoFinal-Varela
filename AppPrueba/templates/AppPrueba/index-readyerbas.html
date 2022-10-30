@@ -30,12 +30,12 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Sobre nosotros</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'leerUsuarios' %}">Contacto</a></h4></li>
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Bandeja de mensajes</a></h4></li>
                         
                         {% if user.is_authenticated %}
                         <img height="40px" src="{{ avatar }}" alt="">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'leerUsuarios' %}">Contacto</a></h4></li>
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Bandeja de mensajes</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
                         
                         
@@ -85,89 +85,22 @@
             <div class="row gx-4 gx-lg-5 justify-content-flex-start">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
-                    
-                    <style>
+                    {% if user.is_authenticated %}
+                        <h1>YERBAS</h1>
 
-                        #contenedor_ms{
-                    
-                            width: 100%;
-                            background: #333;
-                        }
-                    
-                    </style>
-                    
-                    
-                    <h2>CHAT</h2>
-                    
-                    <h1>Mensajes del canal</h1>
-                    
-                    <div id="contenedor_ms"></div>
-                    {% for mensaje in object.canalmensaje_set.all %}
-                        <div class="div_ms {% if request.user == mensaje.usuario %}mis_mensajes
-                        {% else %} tus_mensajes {% endif %}">
-                            <strong>{{mensaje.usuario}}</strong>
-                            <h4>{{mensaje.texto}}</h4>
-                            <small>{{mensaje.tiempo}}</small>
-                            
-                        </div>
-                        <hr class="my-4" />
-                        <hr class="my-4" />
-                    
-                    {% endfor %}
-                    
-                    <div class="div_form_ms">
-                        <form id='form_submit' action='{{ request.path }}' method="POST">
-                            {% csrf_token %}
-                    
-                            {{form.as_p}}
-                            <button type="submit">
-                                Enviar
-                            </button>
-                        </form>
-                    
-                    </div>
-                    
-                        
-                    <script>
-                        const MsgForm =  document.getElementbyId('form_submit')
-                        const msgContainer = document.getElementById('contenedor_ms')
-                        
-                        MsgForm.addEventListener('submit', (event) => {
-                        
-                        event.preventDefault()
-                        const targetDate= event.target 
-                        const formData = new FormData(targetDate)
-                        const xhr = new XMLHttpRequest() 
-                    
-                        const endpoint = MsgForm.getAttribute('action')
-                        const method = MsgForm.getAttribute('method')
-                        xhr.open(method, endpoint)
-                        xhr.responseType = 'json'
-                        xhr.setRequestHeader('HTTP_X_REQUESTED_WITH', 'XMLHttpRequest')
-                        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-                        xhr.onload = () => {
-                    
-                            console.log(xhr.status, xhr.response)
-                    
-                            if(xhr.status === 201){
-                                const respuestaData = xhr.response
-                                let actualMensajeHtml = msgContainer.innerHTML
-                                actualMensajeHtml += `<div class=''><b>${respuestaData.username}</b><p>
-                                    ${respuestaData.mensaje}</p></div>`
-                                msgContainer.innerHTML = actualMensajeHtml
-                                MsgForm.reset()
-                            }else if(xhr.status === 400){
-                                console.log(hxr.response)
-                            }else{
-                                alert('Ocurrio un error, reintentar luego')
-                            }
-                        }
-                    
-                        xhr.send(formData)
-                    
-                        })
-                    </script>
+                        <ul>
+                            {% for int in object_list %}
+                            <li><strong>{{ int }}</strong></li>
+                                <br>
+                            {% endfor %}    
+                        </ul>
+                        <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
+                        <strong>¿Le interesa nuestro contenido? Contactenos!:</strong>
+                                                <a class="btn btn-success" href='{% url "leerUsuarios" %}'>Contactar</a>
 
+                        {% else %}
+
+                        {% endif %}
                    
                         
                     </div>
@@ -182,11 +115,31 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <ul class="list-inline text-center">
                             <li class="list-inline-item">
-                                
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted">Desarrolladores: Facundo Varela y Federico Hanley</div>
-                        <div class="small text-center text-muted">facundovarela88@hotmail.com  /  Federicohanley.fh@gmail.com </div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
                     </div>
                 </div>
             </div>
