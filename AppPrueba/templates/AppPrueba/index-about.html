@@ -29,13 +29,13 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></h4></li>
+                        <img height="40px" src="{{ avatar }}" alt="">
+                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Sobre nosotros</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'leerUsuarios' %}">Contacto</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inbox' %}">Bandeja de mensajes</a></h4></li>
                         
                         {% if user.is_authenticated %}
-                        <img height="40px" src="{{ avatar }}" alt="">
-                        <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4">Hola {{ user.username }}</a></h4></li>
                         <li class="nav-item"><h4><a style="color:black" class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout' %}">Salir</a></h4></li>
                         
                         
@@ -86,21 +86,64 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <!-- Post preview-->
                     {% if user.is_authenticated %}
-                    <h1>MATES</h1>
 
-                    <ul>
-                        {% for int in object_list %}
-                        <li><strong>{{ int }}</strong></li>
-                            <br>
-                        {% endfor %}    
-                    </ul>
-                    <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
-                    <strong>¿Le interesa nuestro contenido? Contactenos!:</strong>
-                                            <a class="btn btn-success" href='{% url "leerUsuarios" %}'>Contactar</a>
-                    {% else %}
+                    <strong>Desarrolladores del Blog:</strong>
 
-                    {% endif %}
-                   
+
+                                    <!-- Divider-->
+                                    <hr class="my-4" />
+                                    <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+                                        <div class="col-md-10 col-lg-8 col-xl-7">
+                                            <!-- Post preview-->
+
+                                    <!-- Post preview-->
+                                            <div class="post-preview">
+                                                <p>
+                                                    <h2 class="post-title">Federico Hanley</h2></a>
+                                                    <p class="post-meta">
+                                                    
+                                                    <img height="250px" src="{% static 'AppPrueba/assets/img/fedecoder.jpg' %}" alt="">
+                                                    <h2 class="post-title">30 años - Magdalena/Buenos Aires - Actualmente trabajando con servicios de mensajería y una cancha de Futbol 5. Est. de programacion/Unlp (Primer año)</h2></a>
+                                                    <p class="post-meta">
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            <!-- Divider-->
+                                            <hr class="my-4" />
+                                            <div class="row gx-4 gx-lg-5 justify-content-flex-start">
+                                                <div class="col-md-10 col-lg-8 col-xl-7">
+                                                    <!-- Post preview-->
+
+                                            <!-- Post preview-->
+                                                    <div class="post-preview">
+                                                        <p>
+                                                            <h2 class="post-title">Facundo Varela</h2></a>
+                                                            <p class="post-meta">
+                                                            
+                                                            <img height="250px" src="{% static 'AppPrueba/assets/img/facucoder.jpg' %}" alt="">
+                                                            <h2 class="post-title">23 años - Mar del Plata/Buenos Aires - Est. de python/UNMDP. Actualmente trabajando como recepcionista en Metropol hotel.</h2></a>
+                                                            <p class="post-meta">
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Divider-->
+                                            <hr class="my-4" />
+                                            <hr class="my-4" />
+                                            <!-- Post preview-->
+                                            
+                                            
+                                            <div class="d-flex justify-content-start mb-4"><a class="btn btn-primary text-uppercase" href="{% url 'inicio' %}">Volver al Inicio</a></div>
+                                            
+                                            {% else %}
+                                            <h2><a href="{% url 'login' %}">Ingresar para visualizar contenido.</a></h2>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                         
                     </div>
                     
